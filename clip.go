@@ -49,13 +49,14 @@ type SearchResults struct {
 }
 
 type SearchResult struct {
-	XMLEntry  xml.Name `xml:"entry"`
-	ArxiveID  string   `xml:"id"`
-	Published string   `xml:"published"`
-	Title     string   `xml:"title"`
-	Summary   string   `xml:"summary"`
-	Authors   []Autho  `xml:"author"`
-	Doi       string   `xml:"doi"`
+	XMLEntry   xml.Name `xml:"entry"`
+	ArxiveID   string   `xml:"id"`
+	Published  string   `xml:"published"`
+	Title      string   `xml:"title"`
+	Summary    string   `xml:"summary"`
+	Authors    []Autho  `xml:"author"`
+	Doi        string   `xml:"doi"`
+	JournalRef string   `xml:"journal_ref"`
 }
 
 type Autho struct {
@@ -86,12 +87,14 @@ func print_xml(ro SearchResults) {
 	fmt.Printf("\n")
 	for i := 0; i < len(ro.SearchResults); i++ {
 		fmt.Println("*", ro.SearchResults[i].Title, "(", ro.SearchResults[i].Published, ")")
-		fmt.Printf("%-3s", ":")
+		fmt.Printf("%-3s|", "")
 		for j := 0; j < len(ro.SearchResults[i].Authors); j++ {
 			fmt.Printf("%s, ", ro.SearchResults[i].Authors[j].Name)
 		}
 		fmt.Printf("\n")
-		fmt.Printf("%-3s%s\n", ":", ro.SearchResults[i].Doi)
+		fmt.Printf("%-3s|%s\n", "", ro.SearchResults[i].Doi)
+		fmt.Printf("%-3s|%s\n", "", ro.SearchResults[i].JournalRef)
+		fmt.Printf("%-3s|%s\n", "", ro.SearchResults[i].ArxiveID)
 		// fmt.Printf("%-3s%s\n", ":", strings.TrimSpace(ro.SearchResults[i].Summary))
 		fmt.Printf("\n")
 	}
@@ -114,11 +117,15 @@ func doi_lookup(doi *string) {
 	print_json(responseObject)
 
 }
-func arxive_search(search_term *string, search_count *int) {
+func arxive_search(search_term, search_prefix, search_prefix_value *string, search_offset, search_count *int) {
+	base_url := "http://export.arxiv.org/api/query?search_query="
 	query := strings.Replace(*search_term, " ", "+AND+", -1)
-	count := *search_count
-	arxive_url_xml := "http://export.arxiv.org/api/query?search_query=all:" + query + "&start=0&max_results=" + strconv.Itoa(count)
-	response, err := http.Get(arxive_url_xml)
+	prefix := *search_prefix + ":"
+	offset := "&start=" + strconv.Itoa(*search_offset)
+	count := "&max_results=" + strconv.Itoa(*search_count)
+
+	arxive_search_query_url := base_url + prefix + query + offset + count
+	response, err := http.Get(arxive_search_query_url)
 	if err != nil {
 		fmt.Print(err.Error())
 		os.Exit(1)
@@ -145,12 +152,17 @@ func lazyclip_usage() {
 
 var doi *string
 var search_term *string
+var search_prefix *string
+var search_prefix_value *string
 var search_count *int
+var search_offset *int
 
 func init_flags() {
 	doi = flag.String("d", "", " DOI of the paper")
-	search_term = flag.String("s", "", " String to be searched in double quotes")
+	search_term = flag.String("s", "", " String to be searched, in double quotes")
+	search_prefix = flag.String("t", "all", " Subject Category to be searched, in double quotes/without space")
 	search_count = flag.Int("c", 5, "Number of results, used in conjunction with -c")
+	search_offset = flag.Int("o", 0, "Search offset, used in conjunction with -c")
 }
 
 func main() {
@@ -159,7 +171,7 @@ func main() {
 	if flag.Lookup("d") != nil && *doi != "" {
 		doi_lookup(doi)
 	} else if flag.Lookup("s") != nil && *search_term != "" {
-		arxive_search(search_term, search_count)
+		arxive_search(search_term, search_prefix, search_prefix_value, search_offset, search_count)
 	} else {
 		lazyclip_usage()
 	}
