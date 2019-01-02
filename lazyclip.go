@@ -2,7 +2,7 @@ package main
 
 import (
 	"encoding/json"
-	_ "encoding/xml"
+	"encoding/xml"
 	"flag"
 	"fmt"
 	"io/ioutil"
@@ -40,6 +40,28 @@ type Author struct {
 	Family string `json:"family"`
 }
 
+type SearchResults struct {
+	XMLEntry      xml.Name       `xml:"feed"`
+	TotalResults  int            `xml:"totalResults"`
+	ItemsPerPage  int            `xml:"itemsPerPage"`
+	SearchResults []SearchResult `xml:"entry"`
+}
+
+type SearchResult struct {
+	XMLEntry  xml.Name `xml:"entry"`
+	ArxiveID  string   `xml:"id"`
+	Published string   `xml:"published"`
+	Title     string   `xml:"title"`
+	Summary   string   `xml:"summary"`
+	Authors   []Autho  `xml:"author"`
+	Doi       string   `xml:"doi"`
+}
+
+type Autho struct {
+	XMLEntry xml.Name `xml:"author"`
+	Name     string   `xml:"name"`
+}
+
 func print_json(ro ArticleDetails) {
 	fmt.Printf("%-15s:%s\n", "doi ", ro.Doi)
 	fmt.Printf("%-15s:%s\n", "url ", ro.Url)
@@ -58,13 +80,20 @@ func print_json(ro ArticleDetails) {
 	fmt.Printf("%-15s:%s\n", "issn ", ro.Issn)
 }
 
-var doi *string
-var search_term *string
-
-func init_flags() {
-	doi = flag.String("d", "", " DOI of the paper")
-	search_term = flag.String("s", "", " String to be searched in double quotes")
-
+func print_xml(ro SearchResults) {
+	fmt.Println("Showing ", ro.ItemsPerPage, "of ", ro.TotalResults, "results")
+	fmt.Printf("\n")
+	for i := 0; i < len(ro.SearchResults); i++ {
+		fmt.Println("*", ro.SearchResults[i].Title, "(", ro.SearchResults[i].Published, ")")
+		fmt.Printf("%-3s", ":")
+		for j := 0; j < len(ro.SearchResults[i].Authors); j++ {
+			fmt.Printf("%s, ", ro.SearchResults[i].Authors[j].Name)
+		}
+		fmt.Printf("\n")
+		fmt.Printf("%-3s%s\n", ":", ro.SearchResults[i].Doi)
+		// fmt.Printf("%-3s%s\n", ":", strings.TrimSpace(ro.SearchResults[i].Summary))
+		fmt.Printf("\n")
+	}
 }
 
 func doi_lookup(doi *string) {
@@ -86,7 +115,7 @@ func doi_lookup(doi *string) {
 }
 func arxive_search(search_term *string) {
 	query := strings.Replace(*search_term, " ", ":", -1)
-	arxive_url_xml := "http://export.arxiv.org/api/query?search_query=" + query + "&start=0&max_results=2"
+	arxive_url_xml := "http://export.arxiv.org/api/query?search_query=" + query + "&start=0&max_results=5"
 	response, err := http.Get(arxive_url_xml)
 	if err != nil {
 		fmt.Print(err.Error())
@@ -97,7 +126,10 @@ func arxive_search(search_term *string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(string(responseData))
+	// fmt.Println(string(responseData))
+	var responseObject SearchResults
+	xml.Unmarshal(responseData, &responseObject)
+	print_xml(responseObject)
 }
 
 func lazyclip_usage() {
@@ -109,10 +141,18 @@ func lazyclip_usage() {
 
 }
 
+var doi *string
+var search_term *string
+
+func init_flags() {
+	doi = flag.String("d", "", " DOI of the paper")
+	search_term = flag.String("s", "", " String to be searched in double quotes")
+
+}
+
 func main() {
 	init_flags()
 	flag.Parse()
-
 	if flag.Lookup("d") != nil && *doi != "" {
 		doi_lookup(doi)
 	} else if flag.Lookup("s") != nil && *search_term != "" {
