@@ -9,6 +9,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 	"strings"
 )
 
@@ -113,9 +114,10 @@ func doi_lookup(doi *string) {
 	print_json(responseObject)
 
 }
-func arxive_search(search_term *string) {
-	query := strings.Replace(*search_term, " ", ":", -1)
-	arxive_url_xml := "http://export.arxiv.org/api/query?search_query=" + query + "&start=0&max_results=5"
+func arxive_search(search_term *string, search_count *int) {
+	query := strings.Replace(*search_term, " ", "+AND+", -1)
+	count := *search_count
+	arxive_url_xml := "http://export.arxiv.org/api/query?search_query=all:" + query + "&start=0&max_results=" + strconv.Itoa(count)
 	response, err := http.Get(arxive_url_xml)
 	if err != nil {
 		fmt.Print(err.Error())
@@ -143,11 +145,12 @@ func lazyclip_usage() {
 
 var doi *string
 var search_term *string
+var search_count *int
 
 func init_flags() {
 	doi = flag.String("d", "", " DOI of the paper")
 	search_term = flag.String("s", "", " String to be searched in double quotes")
-
+	search_count = flag.Int("c", 5, "Number of results, used in conjunction with -c")
 }
 
 func main() {
@@ -156,7 +159,7 @@ func main() {
 	if flag.Lookup("d") != nil && *doi != "" {
 		doi_lookup(doi)
 	} else if flag.Lookup("s") != nil && *search_term != "" {
-		arxive_search(search_term)
+		arxive_search(search_term, search_count)
 	} else {
 		lazyclip_usage()
 	}
