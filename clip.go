@@ -165,7 +165,7 @@ func init_flags() {
 	doi = flag.String("d", "", " DOI of the paper")
 	search_term = flag.String("s", "", " String to be searched, in double quotes")
 	search_prefix = flag.String("t", "all", " Subject Category to be searched, in double quotes/without space")
-	search_prefix_value = flag.String("v", "", " prefix vsalue to be searched, in double quotes/without space")
+	search_prefix_value = flag.String("tv", "", " prefix vsalue to be searched, in double quotes/without space")
 	search_count = flag.Int("c", 5, "Number of results, used in conjunction with -c")
 	search_offset = flag.Int("o", 0, "Search offset, used in conjunction with -c")
 }
