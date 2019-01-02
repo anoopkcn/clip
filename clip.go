@@ -118,11 +118,15 @@ func doi_lookup(doi *string) {
 
 }
 func arxive_search(search_term, search_prefix, search_prefix_value *string, search_offset, search_count *int) {
-	base_url := "http://export.arxiv.org/api/query?search_query="
-	query := strings.Replace(*search_term, " ", "+AND+", -1)
-	prefix := *search_prefix + ":"
-	offset := "&start=" + strconv.Itoa(*search_offset)
-	count := "&max_results=" + strconv.Itoa(*search_count)
+	var base_url, prefix, query, offset, count string
+	base_url = "http://export.arxiv.org/api/query?search_query="
+	prefix = *search_prefix + ":"
+	if flag.Lookup("t") != nil && *search_prefix != "all" {
+		prefix = *search_prefix + ":" + *search_prefix_value + "+AND+"
+	}
+	query = strings.Replace(*search_term, " ", "+AND+", -1)
+	offset = "&start=" + strconv.Itoa(*search_offset)
+	count = "&max_results=" + strconv.Itoa(*search_count)
 
 	arxive_search_query_url := base_url + prefix + query + offset + count
 	response, err := http.Get(arxive_search_query_url)
@@ -161,6 +165,7 @@ func init_flags() {
 	doi = flag.String("d", "", " DOI of the paper")
 	search_term = flag.String("s", "", " String to be searched, in double quotes")
 	search_prefix = flag.String("t", "all", " Subject Category to be searched, in double quotes/without space")
+	search_prefix_value = flag.String("v", "", " prefix vsalue to be searched, in double quotes/without space")
 	search_count = flag.Int("c", 5, "Number of results, used in conjunction with -c")
 	search_offset = flag.Int("o", 0, "Search offset, used in conjunction with -c")
 }
