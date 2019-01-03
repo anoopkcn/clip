@@ -1,2 +1,7 @@
 clip
 *.txt
+bin/clip
+bin/clip.exe
+target
+pkg
+.DS_Store
