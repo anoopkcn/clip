@@ -1,3 +1,8 @@
+// This is the initial clip script which motivated 
+// feature rich a package.
+// It is here for historical purposes only
+// written by Anoop Chandran
+
 package main
 
 import (
