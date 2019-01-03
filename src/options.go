@@ -59,7 +59,7 @@ func ParseOptions() Options {
 	// search command group
 	searchBegin := false
 	searchCommand := flag.NewFlagSet("search", flag.ExitOnError)
-	searchSource := searchCommand.String("source", "arxive", "online repository to be searched")
+	searchSource := searchCommand.String("source", "arxiv", "online repository to be searched")
 	searchString := searchCommand.String("string", "", "search string")
 	searchPrefix := searchCommand.String("prefix", "all", "search prefix")
 	searchPrefixValue := searchCommand.String("prefix-val", "", "value of the prefix")
