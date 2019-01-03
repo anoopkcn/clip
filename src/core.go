@@ -21,7 +21,7 @@ func Run(opts Options, revision string) {
 		switch opts.Search.Source {
 		case "arxiv":
 			fmt.Println("begin search...")
-			// clp.SearchArxiv(opts)
+			SearchArxiv(opts)
 		default:
 			errorExit("please provide a valid source for searching")
 		}
