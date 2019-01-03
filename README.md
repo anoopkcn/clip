@@ -1,2 +1,2 @@
 # lazyCLIP
-lazy Command Line Interface Paper(CLIP) Manager :paperclip: . 
+:fish: lazy Command LIne Paper(CLIP) Manager. 
