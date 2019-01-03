@@ -1,5 +1,6 @@
 clip
 *.txt
+bin
 bin/clip
 bin/clip.exe
 target
