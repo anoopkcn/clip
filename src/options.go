@@ -47,5 +47,8 @@ func ParseOptions() Options {
 	Version := flag.Bool("version", false, "version information of clip")
 	Help := flag.Bool("help", false, "basic usage instructions")
 	flag.Parse()
-	return Options{*Version, *Help}
+	return Options{
+		Version: *Version,
+		Help:    *Help,
+	}
 }
