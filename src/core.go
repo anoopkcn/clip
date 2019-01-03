@@ -6,7 +6,7 @@ import (
 )
 
 func Run(opts Options, revision string) {
-	if opts.Help || len(os.Args) < 2 {
+	if opts.Help {
 		help(exitOk)
 	}
 	if opts.Version {
@@ -16,5 +16,14 @@ func Run(opts Options, revision string) {
 			fmt.Println(version)
 		}
 		os.Exit(exitOk)
+	}
+	if opts.SearchBegin {
+		switch opts.Search.Source {
+		case "arxive":
+			fmt.Println("begin search...")
+			// clp.SearchArxive(opts)
+		default:
+			errorExit("please provide a valid source for searching")
+		}
 	}
 }

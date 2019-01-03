@@ -13,8 +13,18 @@ These are common clip commands and their arguments used in various situations:
 
 // Options stores the values of command-line options
 type Options struct {
-	Version bool
-	Help    bool
+	Version     bool
+	Help        bool
+	SearchBegin bool
+	Search
+}
+type Search struct {
+	Source      string
+	String      string
+	Start       int
+	Results     int
+	Prefix      string
+	PrefixValue string
 }
 
 func help(code int) {
@@ -44,11 +54,39 @@ func atof(str string) float64 {
 }
 
 func ParseOptions() Options {
-	Version := flag.Bool("version", false, "version information of clip")
-	Help := flag.Bool("help", false, "basic usage instructions")
-	flag.Parse()
+	version := flag.Bool("version", false, "version information of clip")
+	help := flag.Bool("help", false, "basic usage instructions")
+	// search command group
+	searchBegin := false
+	searchCommand := flag.NewFlagSet("search", flag.ExitOnError)
+	searchSource := searchCommand.String("source", "arxive", "online repository to be searched")
+	searchString := searchCommand.String("string", "", "search string")
+	searchPrefix := searchCommand.String("prefix", "all", "search prefix")
+	searchPrefixValue := searchCommand.String("prefix-val", "", "value of the prefix")
+	searchStart := searchCommand.Int("start", 0, "offset for search results")
+	searchResults := searchCommand.Int("results", 5, "number of results to be returned")
+	// get command group
+
+	switch os.Args[1] {
+	case "search":
+		searchCommand.Parse(os.Args[2:])
+		if *searchString != "" {
+			searchBegin = true
+		}
+	default:
+		flag.Parse()
+	}
 	return Options{
-		Version: *Version,
-		Help:    *Help,
+		Version:     *version,
+		Help:        *help,
+		SearchBegin: searchBegin,
+		Search: Search{
+			Source:      *searchSource,
+			String:      *searchString,
+			Prefix:      *searchPrefix,
+			PrefixValue: *searchPrefixValue,
+			Start:       *searchStart,
+			Results:     *searchResults,
+		},
 	}
 }
