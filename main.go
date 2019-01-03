@@ -5,5 +5,5 @@ import "./src"
 var revision string
 
 func main() {
-	clip.Run(revision)
+	clip.Run(clip.ParseOptions(), revision)
 }
