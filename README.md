@@ -2,6 +2,8 @@
 
 :fish: lazy Command LIne Paper(CLIP) Manager. 
 
+**Only few of the possible options and commands are listed here, Please refer to wiki for a full list of features**
+
 ## Usage
 
 ```bash
@@ -42,3 +44,4 @@ clip lookup -source crossref --doi "my/paper/doi" --bibtex --file mybib.bib
 
 ### Log
 
+### Batch
