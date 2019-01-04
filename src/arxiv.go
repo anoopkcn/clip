@@ -34,16 +34,17 @@ type Author struct {
 	Name     string   `xml:"name"`
 }
 
-func printArxivXML(ro SearchResults) {
+func printParsedArxivXML(ro SearchResults) {
 	fmt.Println("Showing ", ro.ItemsPerPage, "of ", ro.TotalResults, "results")
 	fmt.Printf("\n")
 	for i := 0; i < len(ro.SearchResults); i++ {
-		fmt.Println("*", ro.SearchResults[i].Title, "(", ro.SearchResults[i].Published, ")")
+		fmt.Println("*", ro.SearchResults[i].Title)
 		fmt.Printf("%-3s|authors: ", "")
 		for j := 0; j < len(ro.SearchResults[i].Authors); j++ {
 			fmt.Printf("%s, ", ro.SearchResults[i].Authors[j].Name)
 		}
 		fmt.Printf("\n")
+		fmt.Printf("%-3s|published: %s\n", "", ro.SearchResults[i].Published)
 		if ro.SearchResults[i].Doi != "" {
 			fmt.Printf("%-3s|doi: %s\n", "", ro.SearchResults[i].Doi)
 		}
@@ -81,5 +82,5 @@ func SearchArxiv(opts Options) {
 	// fmt.Println(string(responseData))
 	var responseObject SearchResults
 	xml.Unmarshal(responseData, &responseObject)
-	printArxivXML(responseObject)
+	printParsedArxivXML(responseObject)
 }

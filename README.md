@@ -36,6 +36,9 @@ clip lookup -doi "DOI/of/a/paper"
 ```bash
 clip lookup -source crossref --doi "my/paper/doi" --bibtex --file mybib.bib
 ```
+
+### pdf
+
 ### Add
 
 ### Rm
