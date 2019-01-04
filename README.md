@@ -34,9 +34,9 @@ clip lookup -source crossref --doi "my/paper/doi" --bibtex --file mybib.bib
 ```
 ### Add
 
-### rm
+### Rm
 
-### mv
+### Mv
 
 ### Commit
 
