@@ -19,7 +19,8 @@ clip search -string "electron"
 ```
 *Tuning search with more options*
 ```bash
-clip search -source arxive -string "electron scattering" -start 0 -results 5 -prefix "cat" -prefix-value "hep-th"
+clip search -source arxive -string "electron scattering" -start 0 \
+-results 5 -prefix "cat" -prefix-value "hep-th"
 ```
 One word strings need not to be in double quotes
 **Note:** For `search`, `-source` flag is active on default with value `"arxiv"`
