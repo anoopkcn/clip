@@ -2,7 +2,7 @@ package clip
 
 import (
 	"encoding/xml"
-	"flag"
+	// "flag"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -58,7 +58,7 @@ func SearchArxiv(opts Options) {
 	var base_url, prefix, query, offset, results string
 	base_url = "http://export.arxiv.org/api/query?search_query="
 	prefix = opts.Search.Prefix + ":"
-	if flag.Lookup("prefix") != nil && prefix != "all" {
+	if opts.Search.Prefix != "all" {
 		prefix = prefix + opts.Search.PrefixValue + "+AND+"
 	}
 	query = strings.Replace(opts.Search.String, " ", "+AND+", -1)

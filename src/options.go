@@ -70,8 +70,11 @@ func ParseOptions() Options {
 	switch os.Args[1] {
 	case "search":
 		searchCommand.Parse(os.Args[2:])
-		if *searchString != "" {
-			searchBegin = true
+		if searchCommand.Parsed() {
+			// Required Flags
+			if *searchString != "" {
+				searchBegin = true
+			}
 		}
 	default:
 		flag.Parse()
