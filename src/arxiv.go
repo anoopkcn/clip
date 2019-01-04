@@ -22,7 +22,7 @@ type SearchResults struct {
 
 type SearchResult struct {
 	XMLEntry   xml.Name `xml:"entry"`
-	ArxiveID   string   `xml:"id"`
+	ArxivID    string   `xml:"id"`
 	Published  string   `xml:"published"`
 	Title      string   `xml:"title"`
 	Summary    string   `xml:"summary"`
@@ -41,14 +41,14 @@ func printArxivXML(ro SearchResults) {
 	fmt.Printf("\n")
 	for i := 0; i < len(ro.SearchResults); i++ {
 		fmt.Println("*", ro.SearchResults[i].Title, "(", ro.SearchResults[i].Published, ")")
-		fmt.Printf("%-3s|", "")
+		fmt.Printf("%-3s|authors: ", "")
 		for j := 0; j < len(ro.SearchResults[i].Authors); j++ {
 			fmt.Printf("%s, ", ro.SearchResults[i].Authors[j].Name)
 		}
 		fmt.Printf("\n")
-		fmt.Printf("%-3s|%s\n", "", ro.SearchResults[i].Doi)
-		fmt.Printf("%-3s|%s\n", "", ro.SearchResults[i].JournalRef)
-		fmt.Printf("%-3s|%s\n", "", ro.SearchResults[i].ArxiveID)
+		fmt.Printf("%-3s|doi: %s\n", "", ro.SearchResults[i].Doi)
+		fmt.Printf("%-3s|ref: %s\n", "", ro.SearchResults[i].JournalRef)
+		fmt.Printf("%-3s|arxivID: %s\n", "", ro.SearchResults[i].ArxivID)
 		// fmt.Printf("%-3s%s\n", ":", strings.TrimSpace(ro.SearchResults[i].Summary))
 		fmt.Printf("\n")
 	}
