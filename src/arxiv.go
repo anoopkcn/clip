@@ -2,7 +2,6 @@ package clip
 
 import (
 	"encoding/xml"
-	// "flag"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -12,7 +11,6 @@ import (
 	"strings"
 )
 
-// http://export.arxiv.org/api/query?search_query=<query:terms>&start=0&max_results=10
 type SearchResults struct {
 	XMLEntry      xml.Name       `xml:"feed"`
 	TotalResults  int            `xml:"totalResults"`
@@ -26,12 +24,12 @@ type SearchResult struct {
 	Published  string   `xml:"published"`
 	Title      string   `xml:"title"`
 	Summary    string   `xml:"summary"`
-	Authors    []Autho  `xml:"author"`
+	Authors    []Author `xml:"author"`
 	Doi        string   `xml:"doi,omitempty"`
 	JournalRef string   `xml:"journal_ref,omitempty"`
 }
 
-type Autho struct {
+type Author struct {
 	XMLEntry xml.Name `xml:"author"`
 	Name     string   `xml:"name"`
 }
