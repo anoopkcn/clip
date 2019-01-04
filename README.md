@@ -1,4 +1,5 @@
 # lazyCLIP
+[![GPL 3](https://img.shields.io/badge/license-GPLv3-blue.svg)](COPYING)
 
 :fish: lazy Command LIne Paper(CLIP) Manager. 
 
