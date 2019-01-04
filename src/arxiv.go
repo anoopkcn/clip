@@ -27,8 +27,8 @@ type SearchResult struct {
 	Title      string   `xml:"title"`
 	Summary    string   `xml:"summary"`
 	Authors    []Autho  `xml:"author"`
-	Doi        string   `xml:"doi"`
-	JournalRef string   `xml:"journal_ref"`
+	Doi        string   `xml:"doi,omitempty"`
+	JournalRef string   `xml:"journal_ref,omitempty"`
 }
 
 type Autho struct {
@@ -46,8 +46,12 @@ func printArxivXML(ro SearchResults) {
 			fmt.Printf("%s, ", ro.SearchResults[i].Authors[j].Name)
 		}
 		fmt.Printf("\n")
-		fmt.Printf("%-3s|doi: %s\n", "", ro.SearchResults[i].Doi)
-		fmt.Printf("%-3s|ref: %s\n", "", ro.SearchResults[i].JournalRef)
+		if ro.SearchResults[i].Doi != "" {
+			fmt.Printf("%-3s|doi: %s\n", "", ro.SearchResults[i].Doi)
+		}
+		if ro.SearchResults[i].JournalRef != "" {
+			fmt.Printf("%-3s|ref: %s\n", "", ro.SearchResults[i].JournalRef)
+		}
 		fmt.Printf("%-3s|arxivID: %s\n", "", ro.SearchResults[i].ArxivID)
 		// fmt.Printf("%-3s%s\n", ":", strings.TrimSpace(ro.SearchResults[i].Summary))
 		fmt.Printf("\n")
