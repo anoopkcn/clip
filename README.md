@@ -72,7 +72,7 @@ clip lookup -string "title-of-a-paper" -bibtex -file mybib.bib
 
 ## Optional functionality
 
-lazyclip by default doesn't have any external dependencies. However the following enhancements are provided upon compiling lazyclip with additional external packages 
+lazyclip by default doesn't have any external dependencies. However the following enhancements are provided upon compiling lazyclip with additional external packages
 
 ### pdf
 
