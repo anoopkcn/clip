@@ -24,7 +24,7 @@ clip [-version][-help] <commands> [<options>]
 
 ## Commands
 
-### Search
+### search
 
 *Simple Usage*
 ```bash
@@ -46,7 +46,7 @@ clip search -string "title-of-a-paper" -match title -bibtex -file mybib.bib
 One word strings need not to be in double quotes
 **Note:** For `search`, `-source` flag is active on default with value `"arxiv"`
 
-### Lookup
+### lookup
 
 `lookup` command performs all the operations of `search` command but on a local `clip` repository or a folder.
 
@@ -58,21 +58,24 @@ clip lookup -string "DOI/of/a/paper" -match doi
 ```bash
 clip lookup -string "title-of-a-paper" -bibtex -file mybib.bib
 ```
+### init
 
-### Add
+### add
 
-### Rm
+### rm
 
-### Mv
+### mv
 
-### Log
+### log
 
-### Batch
+### batch
 
 ## Optional functionality
+
 lazyclip by default doesn't have any external dependencies. However the following enhancements are provided upon compiling lazyclip with additional external packages 
 
 ### pdf
+
 Compiling lazyclip with pdf support will add `pdf` command which perform additional tasks and operations on local pdf files(see wiki). For this functionality lazyclip relies on `poppler-utils` which is an open source package and can be installed using the following:
 
 for Linux:
@@ -85,6 +88,7 @@ brew install poppler-utils
 ```
 
 ### fzf
+
 Compiling lazyclip with fzf support will bring in compatibility with fzf package
 
 ## Additional information
