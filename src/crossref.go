@@ -6,7 +6,6 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"os"
 )
 
 // http://api.crossref.org/works/<DOI>/transform/application/x-bibtex or json
@@ -37,29 +36,29 @@ type CrossrefAuthor struct {
 }
 
 func printParsedCrossrefJSON(ro ArticleDetails) {
-	fmt.Printf("%-15s:%s\n", "  doi ", ro.Doi)
-	fmt.Printf("%-15s:%s\n", "  url ", ro.Url)
-	fmt.Printf("%-15s:%d\n", "  year ", ro.JournalIssue.PublishedPrint.DateParts[0][0])
-	fmt.Printf("%-15s:%s\n", "  volume ", ro.Volume)
-	fmt.Printf("%-15s:%s\n", "  issue ", ro.JournalIssue.Issue)
-	fmt.Printf("%-15s:%s\n", "  pages ", ro.Pages)
-	fmt.Printf("%-15s:%s\n", "  title ", ro.Title)
-	fmt.Printf("%-15s:%s\n", "  journal ", ro.ContainerTitle)
-	fmt.Printf("%-15s:%s\n", "  journal-short ", ro.ContainerTitleShort)
-	fmt.Printf("%-15s:", "  authors ")
+	fmt.Printf("%s%s\n", "*", ro.Title)
+	fmt.Printf("%-20s:%s\n", "  doi ", ro.Doi)
+	fmt.Printf("%-20s:%s\n", "  url ", ro.Url)
+	fmt.Printf("%-20s:%d\n", "  year ", ro.JournalIssue.PublishedPrint.DateParts[0][0])
+	fmt.Printf("%-20s:%s\n", "  volume ", ro.Volume)
+	fmt.Printf("%-20s:%s\n", "  issue ", ro.JournalIssue.Issue)
+	fmt.Printf("%-20s:%s\n", "  pages ", ro.Pages)
+	fmt.Printf("%-20s:%s\n", "  journal ", ro.ContainerTitle)
+	fmt.Printf("%-20s:%s\n", "  journal-s ", ro.ContainerTitleShort)
+	fmt.Printf("%-20s:", "  authors ")
 	for i := 0; i < len(ro.Authors); i++ {
 		fmt.Printf("%s %s, ", ro.Authors[i].Given, ro.Authors[i].Family)
 	}
 	fmt.Printf("\n")
-	fmt.Printf("%-15s:%s\n", "  issn ", ro.Issn)
+	fmt.Printf("%-20s:%s\n", "  issn ", ro.Issn)
 }
 
 func SearchCrossref(opts Options) {
 	crossrefSearchQueryURL := "http://api.crossref.org/works/" + opts.Search.String + "/transform/application/json"
 	response, err := http.Get(crossrefSearchQueryURL)
 	if err != nil {
-		fmt.Print(err.Error())
-		os.Exit(1)
+		// fmt.Print(err.Error())
+		errorExit("search failed. source down or no such host")
 	}
 	defer response.Body.Close()
 	responseData, err := ioutil.ReadAll(response.Body)

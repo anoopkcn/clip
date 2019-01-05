@@ -21,6 +21,7 @@ type Options struct {
 type Search struct {
 	Source  string
 	String  string
+	Match   string
 	Offset  int
 	Results int
 	Filter  string
@@ -59,8 +60,9 @@ func ParseOptions() Options {
 	// search command group
 	searchBegin := false
 	searchCommand := flag.NewFlagSet("search", flag.ExitOnError)
-	searchSource := searchCommand.String("source", "arxiv", "online repository to be searched")
+	searchSource := searchCommand.String("source", "google", "online repository to be searched")
 	searchString := searchCommand.String("string", "", "search string, phrases, doi, etc,.")
+	searchMatch := searchCommand.String("match", "phrase", "what  a given search string should match,[phrase|doi|title|author|issn]")
 	searchFilter := searchCommand.String("filter", "all", "search filter type")
 	searchPrefix := searchCommand.String("prefix", "", "value of the search filter")
 	searchStart := searchCommand.Int("offset", 0, "offset for search results")
@@ -86,6 +88,7 @@ func ParseOptions() Options {
 		Search: Search{
 			Source:  *searchSource,
 			String:  *searchString,
+			Match:   *searchMatch,
 			Filter:  *searchFilter,
 			Prefix:  *searchPrefix,
 			Offset:  *searchStart,

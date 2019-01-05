@@ -1,4 +1,4 @@
-# lazyCLIP
+# lazyCLIP : "Under Development: Users-please come back, developers: fork!!"
 [![GPL 3](https://img.shields.io/badge/license-GPLv3-blue.svg)](COPYING)
 
 lazy Command LIne Paper(CLIP), a reference manager.
@@ -44,6 +44,7 @@ clip search -source crossref -string "doi/of/any/paper" -match doi
 clip search -string "title-of-a-paper" -match title -bibtex -file mybib.bib
 ```
 One word strings need not to be in double quotes
+
 **Note:** For `search`, `-source` flag is active on default with value `"arxiv"`
 
 ### lookup
