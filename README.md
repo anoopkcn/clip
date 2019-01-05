@@ -1,7 +1,7 @@
 # lazyCLIP
 [![GPL 3](https://img.shields.io/badge/license-GPLv3-blue.svg)](COPYING)
 
-lazy Command LIne Paper(CLIP) Manager. 
+lazy Command LIne Paper(CLIP), a reference manager.
 
 **Only few of the possible options and commands are listed here, Please refer to wiki for a full list of features**
 
@@ -11,7 +11,7 @@ If you haven't setup Go before :astonished:, you need to first set a `GOPATH` (s
 
 To fetch and build the code:
 
-    $ go get github.com/strivetobelazy/lazyclip
+    $ go get github.com/strivetobelazy/lazyclip/...
 
 This will also build the command line tool `clip` into `$GOPATH/bin` (assumed to be in your `PATH` already).
 
