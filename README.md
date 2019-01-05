@@ -20,7 +20,7 @@ This will also build the command line tool `clip` into `$GOPATH/bin` (assumed to
 ```bash
 clip [-version][-help] <commands> [<options>]
 ```
-**Note:** Multiple word command-options should be wrapped in double quotes. Commands such as `search`, `lookup` and `add` (for `add` and `search` when `-source` flag is given: please refer to [supported sources](Supported sources)) require an active internet connection. A flag can be given with a `-` or `--` (ex: `-string` is the same as `--string`). Options to a flag can be separated by a `space` or an `=` (ex: `-string "electron"` is the same as `-string="electron"`)
+**Note:** Multiple word command-options should be wrapped in double quotes. Commands such as `search` and `add` (for `add` when `-source` flag is given: please refer to [supported sources](Supported sources)) require an active internet connection. A flag can be given with a `-` or `--` (ex: `-string` is the same as `--string`). Options to a flag can be separated by a `space` or an `=` (ex: `-string "electron"` is the same as `-string="electron"`)
 
 ## Commands
 
@@ -42,11 +42,11 @@ One word strings need not to be in double quotes
 
 *Simple Usage*
 ```bash
-clip lookup -doi "DOI/of/a/paper"
+clip lookup -string "DOI/of/a/paper"
 ```
 *Tuning lookup with more options*
 ```bash
-clip lookup -source crossref --doi "my/paper/doi" --bibtex --file mybib.bib
+clip lookup -string "title-of-a-paper" -bibtex -file mybib.bib
 ```
 
 ### Add
@@ -60,9 +60,11 @@ clip lookup -source crossref --doi "my/paper/doi" --bibtex --file mybib.bib
 ### Batch
 
 ## Optional functionality
+lazyclip by default doesn't have any external dependencies. However the following enhancements are provided upon compiling lazyclip with additional external packages 
 
 ### pdf
-lazyclip by default doesn't have any external dependencies. However if you compile lazyclip with pdf support it can perform additional tasks and operations on local pdf files(see wiki). For this functionality lazyclip relies on `poppler-utils` which is an open source package and can be installed using the following:
+Compiling lazyclip with pdf support will add `pdf` command which perform additional tasks and operations on local pdf files(see wiki). For this functionality lazyclip relies on `poppler-utils` which is an open source package and can be installed using the following:
+
 for Linux:
 ```bash
 sudo apt-get install poppler-utils
@@ -73,6 +75,7 @@ brew install poppler-utils
 ```
 
 ### fzf
+Compiling lazyclip with fzf support will bring in compatibility with fzf package
 
 ## Additional information
 
@@ -84,3 +87,5 @@ The `-source` flag takes following values:
 - `dblp` : [DBLP](https://dblp.uni-trier.de/), a database of Computer Science publications
 - `doi.org` : [doi.org](http://www.doi.org/), a DOI resolver
 - `dissemin` : [Dissemin](https://dissem.in/), a database tracking the open access status of scholarly articles
+
+Note: If you like to see support for an other source, please open an [isuue](https://github.com/strivetobelazy/lazyclip/issues) or contact us via email.
