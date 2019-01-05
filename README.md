@@ -35,14 +35,24 @@ clip search -string "electron"
 clip search -source arxive -string "electron scattering" -offset 0 \
 -results 5 -filter "cat" -prefix "hep-th"
 ```
+*findout more details about a specific information(ex:doi, title, author, etc,.)*
+```bash
+clip search -source crossref -string "doi/of/any/paper" -match doi
+```
+*get information in a bibtex format and append it to a file*
+```bash
+clip search -string "title-of-a-paper" -match title -bibtex -file mybib.bib
+```
 One word strings need not to be in double quotes
 **Note:** For `search`, `-source` flag is active on default with value `"arxiv"`
 
 ### Lookup
 
+`lookup` command performs all the operations of `search` command but on a local `clip` repository or a folder.
+
 *Simple Usage*
 ```bash
-clip lookup -string "DOI/of/a/paper"
+clip lookup -string "DOI/of/a/paper" -match doi
 ```
 *Tuning lookup with more options*
 ```bash
@@ -82,6 +92,7 @@ Compiling lazyclip with fzf support will bring in compatibility with fzf package
 ### Supported sources
 The `-source` flag takes following values:
 
+- `google` : [google](www.google.com), if you couldn't find anything in any other sources.
 - `crossref` : [CrossRef](https://www.crossref.org/), an exhaustive academic search engine
 - `arxiv` : [arXiv](https://arxiv.org/), an archive of pre-prints in various scientific fields
 - `dblp` : [DBLP](https://dblp.uni-trier.de/), a database of Computer Science publications
