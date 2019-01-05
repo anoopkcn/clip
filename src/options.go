@@ -19,12 +19,12 @@ type Options struct {
 	Search
 }
 type Search struct {
-	Source      string
-	String      string
-	Start       int
-	Results     int
-	Prefix      string
-	PrefixValue string
+	Source  string
+	String  string
+	Offset  int
+	Results int
+	Filter  string
+	Prefix  string
 }
 
 func help(code int) {
@@ -61,9 +61,9 @@ func ParseOptions() Options {
 	searchCommand := flag.NewFlagSet("search", flag.ExitOnError)
 	searchSource := searchCommand.String("source", "arxiv", "online repository to be searched")
 	searchString := searchCommand.String("string", "", "search string")
-	searchPrefix := searchCommand.String("prefix", "all", "search prefix")
-	searchPrefixValue := searchCommand.String("prefix-val", "", "value of the prefix")
-	searchStart := searchCommand.Int("start", 0, "offset for search results")
+	searchFilter := searchCommand.String("filter", "all", "search filter type")
+	searchPrefix := searchCommand.String("prefix", "", "value of the search filter")
+	searchStart := searchCommand.Int("offset", 0, "offset for search results")
 	searchResults := searchCommand.Int("results", 5, "number of results to be returned")
 	// get command group
 
@@ -84,12 +84,12 @@ func ParseOptions() Options {
 		Help:        *help,
 		SearchBegin: searchBegin,
 		Search: Search{
-			Source:      *searchSource,
-			String:      *searchString,
-			Prefix:      *searchPrefix,
-			PrefixValue: *searchPrefixValue,
-			Start:       *searchStart,
-			Results:     *searchResults,
+			Source:  *searchSource,
+			String:  *searchString,
+			Filter:  *searchFilter,
+			Prefix:  *searchPrefix,
+			Offset:  *searchStart,
+			Results: *searchResults,
 		},
 	}
 }

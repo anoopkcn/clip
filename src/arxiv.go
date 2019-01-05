@@ -58,17 +58,17 @@ func printParsedArxivXML(ro SearchResults) {
 }
 
 func SearchArxiv(opts Options) {
-	var base_url, prefix, query, offset, results string
+	var base_url, filter, query, offset, results string
 	base_url = "http://export.arxiv.org/api/query?search_query="
-	prefix = opts.Search.Prefix + ":"
-	if opts.Search.Prefix != "all" {
-		prefix = prefix + opts.Search.PrefixValue + "+AND+"
+	filter = opts.Search.Filter + ":"
+	if opts.Search.Filter != "all" {
+		filter = filter + opts.Search.Prefix + "+AND+"
 	}
 	query = strings.Replace(opts.Search.String, " ", "+AND+", -1)
-	offset = "&start=" + strconv.Itoa(opts.Search.Start)
+	offset = "&start=" + strconv.Itoa(opts.Search.Offset)
 	results = "&max_results=" + strconv.Itoa(opts.Search.Results)
 
-	arxivSearchQueryURL := base_url + prefix + query + offset + results
+	arxivSearchQueryURL := base_url + filter + query + offset + results
 	response, err := http.Get(arxivSearchQueryURL)
 	if err != nil {
 		fmt.Print(err.Error())

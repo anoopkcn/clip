@@ -1,7 +1,7 @@
 package clip
 
 const (
-	version = "0.0.0"
+	version = "0.00"
 )
 const (
 	exitCancel    = -1
