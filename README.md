@@ -71,6 +71,8 @@ brew install poppler-utils
 
 ### Batch
 
+## Additional information
+
 ### Supported sources
 The `-source` flag takes following values:
 
