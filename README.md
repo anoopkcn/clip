@@ -49,6 +49,18 @@ clip lookup -doi "DOI/of/a/paper"
 clip lookup -source crossref --doi "my/paper/doi" --bibtex --file mybib.bib
 ```
 
+### Add
+
+### Rm
+
+### Mv
+
+### Log
+
+### Batch
+
+## Optional functionality
+
 ### pdf
 lazyclip by default doesn't have any external dependencies. However if you compile lazyclip with pdf support it can perform additional tasks and operations on local pdf files(see wiki). For this functionality lazyclip relies on `poppler-utils` which is an open source package and can be installed using the following:
 for Linux:
@@ -59,17 +71,8 @@ for Mac:
 ```bash
 brew install poppler-utils
 ```
-### Add
 
-### Rm
-
-### Mv
-
-### Commit
-
-### Log
-
-### Batch
+### fzf
 
 ## Additional information
 
