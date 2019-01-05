@@ -60,7 +60,7 @@ func ParseOptions() Options {
 	searchBegin := false
 	searchCommand := flag.NewFlagSet("search", flag.ExitOnError)
 	searchSource := searchCommand.String("source", "arxiv", "online repository to be searched")
-	searchString := searchCommand.String("string", "", "search string")
+	searchString := searchCommand.String("string", "", "search string, phrases, doi, etc,.")
 	searchFilter := searchCommand.String("filter", "all", "search filter type")
 	searchPrefix := searchCommand.String("prefix", "", "value of the search filter")
 	searchStart := searchCommand.Int("offset", 0, "offset for search results")

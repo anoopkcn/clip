@@ -19,8 +19,11 @@ func Run(opts Options, revision string) {
 	}
 	if opts.SearchBegin {
 		switch opts.Search.Source {
+		case "crossref":
+			fmt.Println("Crossref: begin search...")
+			SearchCrossref(opts)
 		case "arxiv":
-			fmt.Println("begin search...")
+			fmt.Println("arXiv: begin search...")
 			SearchArxiv(opts)
 		default:
 			errorExit("please provide a valid source for searching")
