@@ -9,6 +9,8 @@ import (
 const usage = `usage: clip  [-version] [-help] <command> [<args>]
 
 These are common clip commands and their arguments used in various situations:
+search
+lookup
 `
 
 // Options stores the values of command-line options
