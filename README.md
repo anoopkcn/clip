@@ -1,7 +1,7 @@
-# lazyCLIP : "Under Development: Users-please come back, developers: fork!!"
+# CLIP : "Under Development: Users-please come back, developers: fork!!"
 [![GPL 3](https://img.shields.io/badge/license-GPLv3-blue.svg)](COPYING)
 
-lazy Command LIne Paper(CLIP), a reference manager.
+Command LIne Paper(CLIP), a reference manager.
 
 **Only few of the possible options and commands are listed here, Please refer to wiki for a full list of features**
 
@@ -11,7 +11,7 @@ If you haven't setup Go before :astonished:, you need to first set a `GOPATH` (s
 
 To fetch and build the code:
 
-    $ go get github.com/strivetobelazy/lazyclip/...
+    $ go get github.com/strivetobelazy/clip/...
 
 This will also build the command line tool `clip` into `$GOPATH/bin` (assumed to be in your `PATH` already).
 
@@ -73,11 +73,11 @@ clip lookup -string "title-of-a-paper" -bibtex -file mybib.bib
 
 ## Optional functionality
 
-lazyclip by default doesn't have any external dependencies. However the following enhancements are provided upon compiling lazyclip with additional external packages
+clip by default doesn't have any external dependencies. However the following enhancements are provided upon compiling clip with additional external packages
 
 ### pdf
 
-Compiling lazyclip with pdf support will add `pdf` command which perform additional tasks and operations on local pdf files(see wiki). For this functionality lazyclip relies on `poppler-utils` which is an open source package and can be installed using the following:
+Compiling clip with pdf support will add `pdf` command which perform additional tasks and operations on local pdf files(see wiki). For this functionality lazyclip relies on `poppler-utils` which is an open source package and can be installed using the following:
 
 for Linux:
 ```bash
@@ -90,7 +90,7 @@ brew install poppler-utils
 
 ### fzf
 
-Compiling lazyclip with fzf support will bring in compatibility with fzf package
+Compiling clip with fzf support will bring in compatibility with fzf package
 
 ## Additional information
 
@@ -104,4 +104,4 @@ The `-source` flag takes following values:
 - `doi.org` : [doi.org](http://www.doi.org/), a DOI resolver
 - `dissemin` : [Dissemin](https://dissem.in/), a database tracking the open access status of scholarly articles
 
-Note: If you like to see support for an other source, please open an [isuue](https://github.com/strivetobelazy/lazyclip/issues) or contact us via email.
+Note: If you like to see support for an other source, please open an [isuue](https://github.com/strivetobelazy/clip/issues) or contact us via email.
