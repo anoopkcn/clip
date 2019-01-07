@@ -1,5 +1,5 @@
 # CLIP : "Under Development: Users-please come back, developers: fork!!"
-[![GPL 3](https://img.shields.io/badge/license-GPLv3-blue.svg)](COPYING)
+[![GPL 3](https://img.shields.io/badge/license-GPLv3-blue.svg)](LICENSE)
 
 Command LIne Papers(CLIP), a reference manager.
 
