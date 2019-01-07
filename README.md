@@ -97,7 +97,7 @@ Compiling clip with fzf support will bring in compatibility with fzf package
 ### Supported sources
 The `-source` flag takes following values:
 
-- `google` : [google](www.google.com), if you couldn't find anything in any other sources.
+- `google` : [google](https://www.google.com), if you couldn't find anything in any other sources.
 - `crossref` : [CrossRef](https://www.crossref.org/), an exhaustive academic search engine
 - `arxiv` : [arXiv](https://arxiv.org/), an archive of pre-prints in various scientific fields
 - `dblp` : [DBLP](https://dblp.uni-trier.de/), a database of Computer Science publications
