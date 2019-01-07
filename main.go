@@ -1,6 +1,6 @@
 package main
 
-import "github.com/strivetobelazy/lazyclip/src"
+import "github.com/strivetobelazy/clip/src"
 
 var revision string
 
